@@ -1,5 +1,5 @@
 # AlleyGator
-A bowling scoreboard as a take-away challenge for an SDET position with Experis' gaming branch.
+A bowling scoreboard as a takeaway challenge for an SDET position with Experis' gaming branch.
 
 ---
 
