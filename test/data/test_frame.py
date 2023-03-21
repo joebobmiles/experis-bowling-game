@@ -82,6 +82,29 @@ class TestFrame(unittest.TestCase):
                 frame = Frame(0, case["points"])
                 self.assertEqual(frame.compute_score(), case["result"])
 
+    def test_compute_returns_correct_points_for_orphan_strike_frames(self):
+        cases = [
+            {
+                "points": (8, "/"),
+                "next_points": 5,
+                "result": 15,
+            },
+            {
+                "points": (4, "/"),
+                "next_points": 3,
+                "result": 13,
+            },
+        ]
+
+        for case in cases:
+            with self.subTest(msg="{} + {} = {}".format(case["points"], case["next_points"], case["result"])):
+                frame1 = Frame(0, case["points"])
+                frame2 = Frame(0, (case["next_points"], 0))
+
+                frame1.next = frame2
+
+                self.assertEqual(frame1.compute_score(), case["result"])
+
     def test_set_points_sets_the_point_value_at_specified_index(self):
         frame = Frame(0)
 

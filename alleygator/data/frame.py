@@ -15,7 +15,7 @@ class Frame(object):
             if self.next == None:
                 return None
             else:
-                return self.points[0] + self.next.points[0]
+                return 10 + self.next.points[0]
 
         else:
             total_points = self.points[0] + self.points[1]
