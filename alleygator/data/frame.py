@@ -9,3 +9,6 @@ class Frame(object):
 
     def set_points(self, index, value):
         self.points[index] = value
+
+    def compute_score(self):
+        return self.points[0] + self.points[1]

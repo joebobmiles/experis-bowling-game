@@ -23,6 +23,23 @@ class TestFrame(unittest.TestCase):
     def test_can_set_points_on_creation(self):
         self.assertEqual(Frame(0, (4, 0)).points, [ 4, 0 ])
 
+    def test_compute_returns_correct_points_for_open_frame(self):
+        cases = [
+            {
+                "points": (8, 0),
+                "result": 8,
+            },
+            {
+                "points": (4, 2),
+                "result":6 
+            },
+        ]
+
+        for case in cases:
+            with self.subTest(msg="{} = {}".format(case["points"], case["result"])):
+                frame = Frame(0, case["points"])
+                self.assertEqual(frame.compute_score(), case["result"])
+
     def test_set_points_sets_the_point_value_at_specified_index(self):
         frame = Frame(0)
 
