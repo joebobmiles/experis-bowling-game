@@ -40,6 +40,30 @@ class TestFrame(unittest.TestCase):
                 frame = Frame(0, case["points"])
                 self.assertEqual(frame.compute_score(), case["result"])
 
+    def test_compute_returns_correct_points_for_open_frame_with_siblings(self):
+        cases = [
+            {
+                "previous_score": 10,
+                "points": (8, 0),
+                "result": 18,
+            },
+            {
+                "previous_score": 2,
+                "points": (4, 2),
+                "result": 8,
+            },
+        ]
+
+        for case in cases:
+            with self.subTest(msg="{} + {} = {}".format(case["previous_score"], case["points"], case["result"])):
+                frame1 = Frame(0, case["points"])
+                frame1.compute_score = unittest.mock.Mock(return_value=case["previous_score"])
+
+                frame2 = Frame(1, case["points"])
+                frame2.prev = frame1
+                
+                self.assertEqual(frame2.compute_score(), case["result"])
+
     # Here, orphan strike frames are frames that do not have a 'next' frame.
     def test_compute_returns_correct_points_for_orphan_strike_frames(self):
         cases = [

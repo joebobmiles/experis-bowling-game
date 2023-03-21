@@ -18,4 +18,8 @@ class Frame(object):
                 return self.points[0] + self.next.points[0]
 
         else:
-            return self.points[0] + self.points[1]
+            total_points = self.points[0] + self.points[1]
+            if self.prev == None:
+                return total_points
+            else:
+                return self.prev.compute_score() + total_points
