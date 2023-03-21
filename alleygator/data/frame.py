@@ -11,7 +11,19 @@ class Frame(object):
         self.points[index] = value
 
     def compute_score(self):
-        if self.points[1] == "/":
+        if self.points[0] == "X":
+            if self.next == None:
+                return None
+            else:
+                next_points = 0
+                if self.next.points[1] == "/":
+                    next_points = 10
+                else:
+                    next_points = self.next.points[0] + self.next.points[1]
+
+                return 10 + next_points
+
+        elif self.points[1] == "/":
             if self.next == None:
                 return None
             else:

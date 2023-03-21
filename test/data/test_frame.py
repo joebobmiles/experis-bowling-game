@@ -64,8 +64,8 @@ class TestFrame(unittest.TestCase):
                 
                 self.assertEqual(frame2.compute_score(), case["result"])
 
-    # Here, orphan strike frames are frames that do not have a 'next' frame.
-    def test_compute_returns_correct_points_for_orphan_strike_frames(self):
+    # Here, orphan spare frames are frames that do not have a 'next' frame.
+    def test_compute_returns_correct_points_for_orphan_spare_frames(self):
         cases = [
             {
                 "points": (8, "/"),
@@ -82,7 +82,7 @@ class TestFrame(unittest.TestCase):
                 frame = Frame(0, case["points"])
                 self.assertEqual(frame.compute_score(), case["result"])
 
-    def test_compute_returns_correct_points_for_orphan_strike_frames(self):
+    def test_compute_returns_correct_points_for_spare_frames(self):
         cases = [
             {
                 "points": (8, "/"),
@@ -100,6 +100,33 @@ class TestFrame(unittest.TestCase):
             with self.subTest(msg="{} + {} = {}".format(case["points"], case["next_points"], case["result"])):
                 frame1 = Frame(0, case["points"])
                 frame2 = Frame(0, (case["next_points"], 0))
+
+                frame1.next = frame2
+
+                self.assertEqual(frame1.compute_score(), case["result"])
+
+    def test_compute_returns_correct_points_for_orphan_strike_frames(self):
+        frame = Frame(0, ("X", None))
+        self.assertEqual(frame.compute_score(), None)
+
+    def test_compute_returns_correct_points_for_strike_frames(self):
+        cases = [
+            {
+                "points": ("X", None),
+                "next_points": (4, 3),
+                "result": 17,
+            },
+            {
+                "points": ("X", None),
+                "next_points": (5, "/"),
+                "result": 20,
+            },
+        ]
+
+        for case in cases:
+            with self.subTest(msg="{} + {} = {}".format(case["points"], case["next_points"], case["result"])):
+                frame1 = Frame(0, case["points"])
+                frame2 = Frame(0, case["next_points"])
 
                 frame1.next = frame2
 
