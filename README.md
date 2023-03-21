@@ -38,6 +38,23 @@ gaming branch.
             * Assumes a more tabular format, as you'd expect for keeping track
               of multiple players.
     * I need to design a UI based on the example.
+      * I need a Renderer to map the logic to the UI.
+        * But I also need to give the logic access to the inputs.
+          * Tk uses global variables to store state.
+            * For our use case, we need _three_ pieces of state for each
+              Frame and _four_ for the FinalFrame.
+            * These pieces of state are the pin counts for shots one, two, and
+              three, as well as the score for that Frame.
+            * Not only does each Frame need to monitor its state, but it
+              also needs to monitor the state changes of the Frames it depends
+              on.
+          * The best way I can think to tackle this is to store these pieces of
+            state in the Frames themselves, then tie the UI to the Frames at
+            startup:
+            1. Create an instance of the ScoreCard, which initializes all the
+              Frames.
+            2. Pass the ScoreCard to the UI setup, which will tie the relevant
+              UI elements to the state stored in each Frame.
 
 ---
 
