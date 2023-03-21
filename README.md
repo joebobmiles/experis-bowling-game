@@ -55,6 +55,70 @@ gaming branch.
               Frames.
             2. Pass the ScoreCard to the UI setup, which will tie the relevant
               UI elements to the state stored in each Frame.
+* Thoughts as I implement
+  * While the idea to have state stored in the Frames sounded like a good idea,
+    it seems like that was naive.
+    * Issues:
+      1. Tkinter widget variables require a Tk instance to be created before you
+        use them, otherwise, they will crash due to not having a master frame.
+      2. Tkinter widget variables do not behave like their native counterparts.
+        * You can't use an IntVar like an int, a StringVar like a string, etc...
+    * A better idea: decouple UI from data using subscriber pattern.
+      * Data class posts change events whenever a value is modified.
+      * UI class subscribes to data class change events.
+    * OK, tried the "better idea" and my initial implementation came with a
+      severe gotcha:
+      * `__setattr__` overrides all assignments to an object, including those in
+        the constructor!
+        * WHY!?!?
+      * This means that monkey-patching assignments like we are used to in
+        JavaScript or C# does not work and we need a new way to subscribe to
+        value changes rather than listening in on attribute value assignments.
+        * Makes me think of using the idea of atoms instead, where the values
+          themselves are subscribable.
+        * Simpler, more immediate implementation: just use functions to set the
+          value instead.
+    * Additional gotcha I'm having difficulty navigating: for some reason when
+      I assign a value to the attribute of a class instance, it affects other
+      instances???
+      * I'm missing something, and there's a sense I'm getting from
+        documentation snippets I've read that it has something to do with
+        inheritance from `object`.
+        * What is the "new style" I've been reading about with objects???
+        * Removing the inheritance from `object` did nothing to change the tests.
+          * Figured it out: default arguments are passed by reference.
+            * WHY!?!?
+            * Turns out that when you declare a mutable object as the default
+              value for an argument, it belongs to a higher scope and is passed
+              by reference to each function call.
+              * This could be used to maintain function-local state that persists
+                between calls ala C static variables inside functions.
+  * As I iterate on implementing a subscriber/observer pattern for mapping
+    changes back and forth, a different method is forming in my head
+    * What if we stored all state in a single data object, forgoing the whole
+      linked list idea and Frames that autonomously update themselves?
+    * It'd be a hack, but it could work, and we'd be able to move faster than
+      worrying about relatively minute architecture concerns.
+    * Scrapping this idea because it's a hack, but not a _testable_ hack.
+  * Something I didn't originally anticipate but see now with the Frames is that
+    the data transmission is two-way:
+    * Data enters the Frames from Tkinter via the inputs.
+    * Data leaves the Frames via the computed score.
+    * We have a cycle of data:
+      1. The user updates a point entry in a frame in the UI.
+      2. Tkinter notifies the concerned Frame (who is subscribed to Tkinter)
+        that the point entry has changed, and provides it the new value in via
+        a registered callback.
+      3. The Frame's callback invokes a "compute score" function, then notifies
+        Tkinter that the score has changed.
+        * The Frame also notifies "upstream" Frames that the score has updated,
+          triggering their "compute scores," which also notify Tkinter.
+      4. Tkinter updates the scores as they come in, eventually landing back at
+        a steady state waiting for user input.
+        * Will we want to have a queue to make sure that inputs are handled in
+          the order they are completed?
+          * I only consider this because of JavaScript's async logic and a desire
+            to avoid a race condition.
 
 ---
 
