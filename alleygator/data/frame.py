@@ -4,8 +4,9 @@ class Frame(object):
         self.points = [ points[0], points[1] ]
         self.score = None 
 
-        self.prev = None
-        self.next = None
+        # ALSJDHLKJF TYPE ANNOTATIONS!?!?!
+        self.prev: Frame = None
+        self.next: Frame = None
 
     def set_points(self, index, value):
         self.points[index] = value
