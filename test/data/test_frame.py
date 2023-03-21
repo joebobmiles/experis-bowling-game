@@ -131,6 +131,16 @@ class TestFrame(unittest.TestCase):
                 frame1.next = frame2
 
                 self.assertEqual(frame1.compute_score(), case["result"])
+    
+    def test_compute_returns_correct_points_for_multiple_strikes(self):
+        frame1 = Frame(0, ("X", None))
+        frame2 = Frame(0, ("X", None))
+        frame3 = Frame(0, ("X", None))
+
+        frame1.next = frame2
+        frame2.next = frame3
+
+        self.assertEqual(frame1.compute_score(), 30)
 
     def test_set_points_sets_the_point_value_at_specified_index(self):
         frame = Frame(0)
