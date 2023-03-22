@@ -151,12 +151,25 @@ gaming branch.
         in unit tests, but I can't seem to get it to install properly on my
         machine.
       * Attempting to use the official Sikuli adapter for Python came with its
-        own complications. Required to orchestrate a background server alongside
+        complications. Required to orchestrate a background server alongside
         the tests.
       * Again, for speed, I'm just using Sikuli IDE.
     * OK, Sikuli is entertaining...
       * Had to decrease its tolerance for differences to prevent it from clicking
         on the wrong input field.
+    * Ideas I'd love to try with testing and Sikuli:
+      1. Provide arguments to AlleyGator to give it an initial state.
+        * Would short-circuit having to use Sikuli to setup the state for the test.
+      2. Integrate Sikuli into tests run by unittest.
+        * Won't have to manually run every test, can run them in batches.
+        * Don't have to read the output of every test to determine if a failure occurred.
+      3. Per test recording.
+        * Not 100% sure how to go about that, but I would love to just have footage
+          to watch instead of running everything over and over again.
+          * This was the premise of the Replay application I contributed to
+            back in 2021, but for web applications.
+        * The Benefit would be the easy sharing of test cases that illustrate
+          what is going on.
 
 ---
 
