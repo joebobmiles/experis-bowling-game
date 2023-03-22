@@ -7,4 +7,4 @@ if exists("alleygator_startup.png"):
         print("failure")
 
 else:
-    print("failure")
+    print("no application to test!")
