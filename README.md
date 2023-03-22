@@ -111,14 +111,14 @@ gaming branch.
         a registered callback.
       3. The Frame's callback invokes a "compute score" function, then notifies
         Tkinter that the score has changed.
-        * The Frame also notifies "upstream" Frames that the score has updated,
-          triggering their "compute scores," which also notify Tkinter.
+         * The Frame also notifies "upstream" Frames that the score has updated,
+           triggering their "compute scores," which also notify Tkinter.
       4. Tkinter updates the scores as they come in, eventually landing back at
         a steady state waiting for user input.
-        * Will we want to have a queue to make sure that inputs are handled in
-          the order they are completed?
-          * I only consider this because of JavaScript's async logic and a desire
-            to avoid a race condition.
+         * Will we want to have a queue to make sure that inputs are handled in
+           the order they are completed?
+           * I only consider this because of JavaScript's async logic and a desire
+             to avoid a race condition.
   * Pivoting hard to a more productive angle.
     * Instead of getting stuck into the weeds about the logic and backend, I'm
       pivoting to building the UI and figuring out how to, as simply as possible,
@@ -159,17 +159,25 @@ gaming branch.
         on the wrong input field.
     * Ideas I'd love to try with testing and Sikuli:
       1. Provide arguments to AlleyGator to give it an initial state.
-        * Would short-circuit having to use Sikuli to setup the state for the test.
+         * Would short-circuit having to use Sikuli to setup the state for the test.
       2. Integrate Sikuli into tests run by unittest.
-        * Won't have to manually run every test, can run them in batches.
-        * Don't have to read the output of every test to determine if a failure occurred.
+         * Won't have to manually run every test, can run them in batches.
+         * Don't have to read the output of every test to determine if a failure occurred.
       3. Per test recording.
-        * Not 100% sure how to go about that, but I would love to just have footage
-          to watch instead of running everything over and over again.
-          * This was the premise of the Replay application I contributed to
-            back in 2021, but for web applications.
-        * The Benefit would be the easy sharing of test cases that illustrate
-          what is going on.
+         * Not 100% sure how to go about that, but I would love to just have footage
+           to watch instead of running everything over and over again.
+         * This was the premise of the Replay application I contributed to
+           back in 2021, but for web applications.
+         * The Benefit would be the easy sharing of test cases that illustrate
+           what is going on.
+      4. Parameterize tests to automate testing for each input.
+         * Right now, I have to create an individual test for each input field,
+           which makes the test suite even more fragile than it already is.
+         * Reading the documentation for Sikuli, seems that this is what Regions
+           would be used for.
+           * Bingo. Got it working for the test that verifies digits can be
+             input without issue.
+           * Got to say it is satisfying watching this thing run.
 
 ---
 
