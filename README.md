@@ -145,6 +145,15 @@ gaming branch.
         * For speed, I might combine the model and view model into a single class
           so that I don't have to monkey too much with architecture and hopefully
           avoid more gotchas.
+    * Instead of getting stuck trying to implement unit tests, I've opted to use
+      Sikuli to verify that things are working as intended.
+      * I would've used a Sikuli wrapper for Python to use it directly
+        in unit tests, but I can't seem to get it to install properly on my
+        machine.
+      * Attempting to use the official Sikuli adapter for Python came with its
+        own complications. Required to orchestrate a background server alongside
+        the tests.
+      * Again, for speed, just using Sikuli GUI.
 
 ---
 
