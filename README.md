@@ -153,7 +153,10 @@ gaming branch.
       * Attempting to use the official Sikuli adapter for Python came with its
         own complications. Required to orchestrate a background server alongside
         the tests.
-      * Again, for speed, just using Sikuli GUI.
+      * Again, for speed, I'm just using Sikuli IDE.
+    * OK, Sikuli is entertaining...
+      * Had to decrease its tolerance for differences to prevent it from clicking
+        on the wrong input field.
 
 ---
 
