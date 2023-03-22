@@ -119,6 +119,32 @@ gaming branch.
           the order they are completed?
           * I only consider this because of JavaScript's async logic and a desire
             to avoid a race condition.
+  * Pivoting hard to a more productive angle.
+    * Instead of getting stuck into the weeds about the logic and backend, I'm
+      pivoting to building the UI and figuring out how to, as simply as possible,
+      manage the state of the application.
+    * As I pivot, I'm looking solely at the UI and stripping down everything to
+      as bare as I can get.
+      * Use an array of dictionaries for storing frame information.
+      * In that array, store Tk variables that are mapped to entries and labels
+        as necessary.
+      * Attach a magic "resolver" that will compute the scores.
+    * OK, not as productive as I had imagined: how the hell do I implement the
+      feature for jumping to the next entry?
+      * I did shoot myself in the foot by not preserving references to the
+        entries I created.
+      * It is also complicated by nesting things in frames.
+  * New day, new patience.
+    * Good to learn that the default behavior in Tkinter on validation failure is
+      to prevent a change in an entry.
+      * Probably attributed to using the %P selector, which grabs the new value.
+    * I'm looking at building a MVVM architecture.
+      * MVC doesn't lend itself well to desktop applications in my experience.
+      * Tkinter manages the core view, we provide a view model for frames that
+        map the model frames to a usable view.
+        * For speed, I might combine the model and view model into a single class
+          so that I don't have to monkey too much with architecture and hopefully
+          avoid more gotchas.
 
 ---
 
