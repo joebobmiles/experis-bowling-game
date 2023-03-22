@@ -178,6 +178,11 @@ gaming branch.
            * Bingo. Got it working for the test that verifies digits can be
              input without issue.
            * Got to say it is satisfying watching this thing run.
+    * Interesting observation about this visual testing:
+      * It has me thinking about visual design from a testability perspective.
+      * Since the software can be confused (quite easily sometimes) by visually
+        indistinct elements, there's a fascinating application for accessibility
+        testing.
 
 ---
 
