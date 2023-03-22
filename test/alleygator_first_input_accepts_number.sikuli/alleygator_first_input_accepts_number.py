@@ -3,3 +3,8 @@ if exists("alleygator_startup.png"):
     type("1")
     if exists("1679505206614.png"):
         print("success")
+    else:
+        print("failure")
+
+else:
+    print("failure")
