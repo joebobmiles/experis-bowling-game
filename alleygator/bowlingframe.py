@@ -35,6 +35,8 @@ class BowlingFrame(ttk.Frame):
     def __init__(self, root_frame: ttk.Frame, number, prev, next):
         super().__init__(root_frame)
 
+        self["padding"] = (0, 16, 16, 16)
+
         self.prev: BowlingFrame = prev
         self.next: BowlingFrame = next
 
@@ -56,6 +58,8 @@ class BowlingFrame(ttk.Frame):
 class BowlingLastFrame(BowlingFrame):
     def __init__(self, root_frame: ttk.Frame, number, prev):
         super().__init__(root_frame, number, prev, None)
+
+        self["padding"] = (0, 16, 0, 16)
 
         self.pin_counts = (StringVar(), StringVar(), StringVar())
 
