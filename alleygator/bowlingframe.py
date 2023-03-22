@@ -49,15 +49,16 @@ class BowlingFrame(ttk.Frame):
         score_number.grid(column=1, row=3, columnspan=3)
 
     def validate(self, value):
-        pattern = r"^([0-9]|\/|X)?$"
+        pattern = r"^([0-9]|\/|[xX])?$"
         if re.fullmatch(pattern, value) is None:
             return False
 
         # next_entry.focus()
         return True
 
-    def on_invalid():
+    def on_invalid(self):
         print("invalid")
+
 class BowlingLastFrame(BowlingFrame):
     def __init__(self, root_frame: ttk.Frame, number, prev):
         super().__init__(root_frame, number, prev, None)
@@ -67,4 +68,12 @@ class BowlingLastFrame(BowlingFrame):
         self.pin_counts = (StringVar(), StringVar(), StringVar())
 
         third_points_entry = ttk.Entry(self, width=3, textvariable=self.pin_counts[2], justify=CENTER)
+        third_points_entry["validate"] = "key"
+        third_points_entry["validatecommand"] = (
+            third_points_entry.register(self.validate),
+            "%P"
+        )
+        third_points_entry["invalidcommand"] = (
+            third_points_entry.register(self.on_invalid),
+        )
         third_points_entry.grid(column=3, row=2)

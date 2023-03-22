@@ -7,9 +7,9 @@ if exists("alleygator_startup_v2.png"):
         
         for field in sorted_fields:
             click(field)
-            type("/")
+            type("X")
     
-            if field.has("1679515145015.png"):
+            if field.has("1679517178313.png"):
                 print("success")
             else:
                 print("failure")

@@ -9,7 +9,7 @@ if exists("alleygator_startup_v2.png"):
             click(field)
             type("/")
     
-            if field.has("1679515145015.png"):
+            if field.has("1679516813679.png"):
                 print("success")
             else:
                 print("failure")
