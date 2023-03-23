@@ -1,3 +1,5 @@
+[![wakatime](https://wakatime.com/badge/user/fae05115-5e70-4df1-90c0-1a981cbdf216/project/12a7a934-432c-4b7d-94fd-11d17314fb61.svg)](https://wakatime.com/badge/user/fae05115-5e70-4df1-90c0-1a981cbdf216/project/12a7a934-432c-4b7d-94fd-11d17314fb61)
+
 # AlleyGator
 
 A bowling scoreboard as a takeaway challenge for an SDET position with Experis'
